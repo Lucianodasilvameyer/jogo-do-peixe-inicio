@@ -11,6 +11,11 @@ public class MovimentoDoPeixe : MonoBehaviour
     private int direction;
 
     
+
+    
+
+
+
     Rigidbody2D righ;
 
     private void FixedUpdate()
@@ -35,23 +40,27 @@ public class MovimentoDoPeixe : MonoBehaviour
     {
         if (direction == 0)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A) && Input.GetKeyDown(KeyCode.Space))
             {
+               
                 direction = 1;
                 Debug.Log("correu");
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.D) && Input.GetKeyDown(KeyCode.Space))
             {
+               
                 direction = 2;
                 Debug.Log("correu");
             }
-            else if (Input.GetKeyDown(KeyCode.W))
+            else if (Input.GetKeyDown(KeyCode.W) && Input.GetKeyDown(KeyCode.Space))
             {
+                
                 direction = 3;
                 Debug.Log("correu");
             }
-            else if (Input.GetKeyDown(KeyCode.S))
+            else if (Input.GetKeyDown(KeyCode.S) && Input.GetKeyDown(KeyCode.Space))
             {
+                
                 direction = 4;
                 Debug.Log("correu");
             }
@@ -87,4 +96,5 @@ public class MovimentoDoPeixe : MonoBehaviour
             }
         }
     }
+   
 }
