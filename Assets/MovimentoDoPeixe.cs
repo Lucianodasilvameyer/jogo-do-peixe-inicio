@@ -6,11 +6,22 @@ public class MovimentoDoPeixe : MonoBehaviour
 {
     public float speed;
     public float dashSpeed;
-    private float dashTime;
-    public float startDashTime;
+   
+    
     private int direction;
 
+    public bool recarregar=false;
+
+   
+
+    public int Timer=1;
+
     
+
+    private float TempoDashInicial;
+
+    [SerializeField]
+    private float TempoDashMax;
 
     
 
@@ -18,83 +29,70 @@ public class MovimentoDoPeixe : MonoBehaviour
 
     Rigidbody2D righ;
 
-    private void FixedUpdate()
+    private void FixedUpdate()//usado quando se usa calculos de fisica? 
     {
         Vector3 Position = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         righ.velocity = Position * speed;
+
+
+
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+        if (Input.GetKeyDown(KeyCode.Space) && recarregar==false)
+        {
+            Dash(x, y);
+
+            if (Input.GetKeyDown(KeyCode.Space) && recarregar == false && recarregar2 ==false)
+            {
+                Dash(x, y);
+
+                Debug.Log("correu");
+                recarregar = true;
+                
+            }
+
+           
+        }
+
+        if(Time.time>=TempoDashInicial+TempoDashMax && recarregar == true)
+        {
+
+            recarregar2 = true;
+
+            if (Time.time >= TempoDashInicial + TempoDashMax && Timer)
+            {
+                recarregar = false;
+                
+
+                TempoDashInicial = Time.time;
+            }
+        }
+        
+
     }
 
     void Start()
     {
         righ = GetComponent<Rigidbody2D>();
-        dashTime = startDashTime;
+        
     }
 
-    
+
 
 
     // Start is called before the first frame update
-    
+
     // Update is called once per frame
     void Update()
     {
-        if (direction == 0)
-        {
-            if (Input.GetKeyDown(KeyCode.A) && Input.GetKeyDown(KeyCode.Space))
-            {
-               
-                direction = 1;
-                Debug.Log("correu");
-            }
-            else if (Input.GetKeyDown(KeyCode.D) && Input.GetKeyDown(KeyCode.Space))
-            {
-               
-                direction = 2;
-                Debug.Log("correu");
-            }
-            else if (Input.GetKeyDown(KeyCode.W) && Input.GetKeyDown(KeyCode.Space))
-            {
-                
-                direction = 3;
-                Debug.Log("correu");
-            }
-            else if (Input.GetKeyDown(KeyCode.S) && Input.GetKeyDown(KeyCode.Space))
-            {
-                
-                direction = 4;
-                Debug.Log("correu");
-            }
-        }
-        else
-        {
-            if (dashTime <= 0)
-            {
-                direction = 0;
-                dashTime = startDashTime;
-                righ.velocity = Vector2.zero; 
-            }
-            else
-            {
-                dashTime -= Time.deltaTime;
 
-                if (direction == 1)
-                {
-                    righ.velocity = Vector2.left * dashSpeed;
-                }
-                else if(direction==2)
-                {
-                    righ.velocity = Vector2.right * dashSpeed;
-                }
-                else if (direction == 3)
-                {
-                    righ.velocity = Vector2.up * dashSpeed;
-                }
-                else if (direction == 4)
-                {
-                    righ.velocity = Vector2.down * dashSpeed;
-                }
-            }
-        }
+        
+
+    }    
+    public void Dash(float x, float y)
+    {
+        Vector2 direction = new Vector2(x, y);
+        righ.AddForce(direction * dashSpeed, ForceMode2D.Impulse);//força e modo respectivamente? no caso o direction vira um vetor ao ser adicionado força a ele 
     }
    
 }

@@ -33,7 +33,7 @@ public class Move : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!dash.startDelay)
+        if (!dash.startDelay)//aqui se usa o nome do objeto da classe para acessar tanto variaveis quanto funções?
         {
             rb.velocity = new Vector2(travellingDirection * speed, rb.velocity.y);
         }

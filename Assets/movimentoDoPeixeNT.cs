@@ -35,21 +35,21 @@ public class movimentoDoPeixeNT : MonoBehaviour
         float moveX = 0f;
         float moveY = 0f;
 
-       if(Input.GetKey(KeyCode.W))
+       if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.Space))
        {
-            moveY = +1f;    
+            moveY = +10f;    
        }
-       if(Input.GetKey(KeyCode.S))
+       if(Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.Space))
        {
-            moveY = -1f;
+            moveY = -10f;
        }
-       if (Input.GetKey(KeyCode.A))
+       if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.Space))
        {
-            moveX = -1f;
+            moveX = -10f;
        }
-       if (Input.GetKey(KeyCode.D))
+       if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.Space))
        {
-            moveX = +1f;
+            moveX = +10f;
        }
         bool isIdle = moveX == 0 && moveY == 0;
 
